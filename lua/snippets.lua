@@ -8,8 +8,9 @@
 --   }
 --
 -- Snippets declared here are read-only on the screen (c copies one into your
--- own). plugin/snippets.lua does the rest; this file only holds what
--- configuration declared, so the two share it through require's cache.
+-- own). plugin/snippets.lua does the rest; this file holds what
+-- configuration declared, so the two share it through require's cache, and
+-- the plugin puts pick, save and manage on it for binds of your own.
 
 local M = { declared = {} }
 

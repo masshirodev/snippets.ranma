@@ -23,7 +23,9 @@ Needs: Nothing beyond ranma. `snip save` needs a shell that marks its commands w
 ```text
 snippets: saved shell commands, typed into the focused pane.
 
-leader shift+c opens a picker of snippets: the ones scoped to the pane's
+leader shift+c is a which-key folder: p the picker, s snip save, m snip
+manage (require("snippets").pick, .save and .manage, to bind them
+elsewhere). The picker lists snippets: the ones scoped to the pane's
 repository first, then the ones for everywhere (a snippet scoped to another
 repository is hidden unless snippets.show_all). Picking one asks for each
 {placeholder} in it, or {placeholder:default}, one prompt each (the last
@@ -67,11 +69,16 @@ line like your prompt can fool it, so you correct it before it is saved.
 
 | Key or command | |
 | --- | --- |
-| `leader shift+c` | The picker, in the which-key `plugins` group. |
+| `leader shift+c` | A which-key folder, `snippets`, under the `plugins` group. |
+| `leader shift+c p` | The picker. |
+| `leader shift+c s` | `snip save`. |
+| `leader shift+c m` | `snip manage`. |
 | `snip` | The picker. |
 | `snip NAME` | That snippet straight away (the palette completes names). |
 | `snip save` | Save the last command the pane ran as a snippet. |
 | `snip manage` | The screen: add, edit, rename, scope, delete. |
+
+To move the folder, unbind it in `init.lua` after the plugin loads and bind the commands where you like, for example `ranma.unbind("shift+c")` and then `ranma.bind("n", function() require("snippets").pick() end, { desc = "snippets", exit = true })`. The module also has `save` and `manage`.
 
 ## Snippets in your configuration
 

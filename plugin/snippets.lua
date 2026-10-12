@@ -1,6 +1,8 @@
 -- snippets: saved shell commands, typed into the focused pane.
 --
--- leader shift+c opens a picker of snippets: the ones scoped to the pane's
+-- leader shift+c is a which-key folder: p the picker, s snip save, m snip
+-- manage (require("snippets").pick, .save and .manage, to bind them
+-- elsewhere). The picker lists snippets: the ones scoped to the pane's
 -- repository first, then the ones for everywhere (a snippet scoped to another
 -- repository is hidden unless snippets.show_all). Picking one asks for each
 -- {placeholder} in it, or {placeholder:default}, one prompt each (the last
@@ -574,4 +576,11 @@ end, {
   end,
 })
 
-ranma.bind("shift+c", pick, { desc = "snippets", group = "plugins", exit = true })
+-- For a bind of your own: require("snippets").pick() and the rest.
+api.pick, api.save, api.manage = pick, save_last, manage
+
+-- A folder, not a key of its own: leader shift+c, then what to do.
+ranma.bind("shift+c", { folder = "snippets", group = "plugins" })
+ranma.bind("shift+c p", pick, { desc = "pick one", exit = true })
+ranma.bind("shift+c s", save_last, { desc = "save last", exit = true })
+ranma.bind("shift+c m", manage, { desc = "manage", exit = true })
